@@ -31,7 +31,7 @@ def create_incident():
 
     serial_value = json.dumps(value)
     r.set(key, serial_value)
-    return jsonify({"message": f"Key '{key}' set with value '{value}'"}), 201
+    return jsonify({"message": f"Key '{key}' set with value '{serial_value}'"}), 201
 
 @app.route('/incident/<key>', methods=['GET'])
 def read_incident(key):
