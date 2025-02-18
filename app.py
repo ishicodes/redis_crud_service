@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json
 import redis
 
 # Initialize Flask app
@@ -28,7 +28,8 @@ def create_incident():
     if not key:
         return jsonify({"error": "No key with prefix 'INCIDENT_' found"}), 400
 
-    r.set(key, value)
+    serial_value = json.dumps(value)
+    r.set(key, serial_value)
     return jsonify({"message": f"Key '{key}' set with value '{value}'"}), 201
 
 @app.route('/incident/<key>', methods=['GET'])
